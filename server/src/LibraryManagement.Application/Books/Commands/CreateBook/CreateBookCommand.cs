@@ -5,7 +5,7 @@ using LibraryManagement.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement.Application.Books.Commands;
+namespace LibraryManagement.Application.Books.Commands.CreateBook;
 
 public record CreateBookCommand(
     string Isbn,

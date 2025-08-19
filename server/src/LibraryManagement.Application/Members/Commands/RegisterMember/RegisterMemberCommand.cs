@@ -5,7 +5,7 @@ using LibraryManagement.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement.Application.Members.Commands;
+namespace LibraryManagement.Application.Members.Commands.RegisterMember;
 
 public record RegisterMemberCommand(
     string FirstName,

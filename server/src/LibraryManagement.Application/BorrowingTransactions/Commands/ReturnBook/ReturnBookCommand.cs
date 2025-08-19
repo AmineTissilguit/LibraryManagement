@@ -4,7 +4,7 @@ using LibraryManagement.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement.Application.BorrowingTransactions.Commands;
+namespace LibraryManagement.Application.BorrowingTransactions.Commands.ReturnBook;
 
 public record ReturnBookCommand(
     int TransactionId

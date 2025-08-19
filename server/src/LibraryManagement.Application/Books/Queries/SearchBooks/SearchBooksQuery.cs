@@ -4,7 +4,7 @@ using LibraryManagement.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement.Application.Books.Queries;
+namespace LibraryManagement.Application.Books.Queries.SearchBooks;
 
 public record SearchBooksQuery(string SearchTerm) : IRequest<ErrorOr<List<Book>>>;
 

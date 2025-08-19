@@ -4,7 +4,7 @@ using LibraryManagement.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagement.Application.Books.Queries;
+namespace LibraryManagement.Application.Books.Queries.GetBookById;
 
 public record GetBookByIdQuery(int Id) : IRequest<ErrorOr<Book>>;
 
