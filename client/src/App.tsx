@@ -1,5 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Books from "./pages/Books";
+
 function App() {
-  return <h1 className="text-amber-200  font-bold underline">Hello</h1>;
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Books />} />
+        <Route path="books" element={<Books />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

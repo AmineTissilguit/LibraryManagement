@@ -8,8 +8,8 @@ public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
     {
         RuleFor(x => x.Isbn)
             .NotEmpty().WithMessage("ISBN is required")
-            .Matches(@"^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
-            .WithMessage("Invalid ISBN format");
+            .Matches(@"^[\d-]+$").WithMessage("ISBN should only contain numbers and dashes")
+            .Length(10, 17).WithMessage("ISBN must be between 10 and 17 characters");
 
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Title is required")
