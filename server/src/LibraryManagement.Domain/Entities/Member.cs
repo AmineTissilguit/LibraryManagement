@@ -1,4 +1,3 @@
-using System;
 using ErrorOr;
 using LibraryManagement.Domain.Common;
 using LibraryManagement.Domain.Enums;
@@ -34,9 +33,9 @@ public class Member : AggregateRoot
         RegistrationDate = DateTime.UtcNow;
         IsActive = true;
         ActiveBorrowingsCount = 0;
-        
+
         RaiseDomainEvent(new MemberRegisteredEvent(
-        Id, 
+        Id,
         MembershipNumber,
         Email,
         FullName,
@@ -69,7 +68,7 @@ public class Member : AggregateRoot
             return Error.Forbidden("Member.NotActive", "Member account is not active");
 
         if (ActiveBorrowingsCount >= GetBorrowingLimit())
-            return Error.Conflict("Member.BorrowingLimitExceeded", 
+            return Error.Conflict("Member.BorrowingLimitExceeded",
                                 $"Member has reached borrowing limit of {GetBorrowingLimit()}");
 
         return Result.Success;

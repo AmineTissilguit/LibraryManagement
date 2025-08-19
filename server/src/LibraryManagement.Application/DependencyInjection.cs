@@ -15,7 +15,8 @@ public static class DependencyInjection
 
         builder.Services.AddValidatorsFromAssembly(assembly);
 
-        builder.Services.AddMediatR(cfg => {
+        builder.Services.AddMediatR(cfg =>
+        {
             cfg.RegisterServicesFromAssembly(assembly);
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         });

@@ -1,4 +1,3 @@
-using System;
 using ErrorOr;
 using LibraryManagement.Domain.Common;
 using LibraryManagement.Domain.Enums;
@@ -19,7 +18,7 @@ public class Book : AggregateRoot
 
     private Book() { }
 
-    public Book(string isbn, string title, string author, string publisher, 
+    public Book(string isbn, string title, string author, string publisher,
                int publicationYear, string genre, int totalCopies)
     {
         Isbn = isbn;
@@ -39,21 +38,21 @@ public class Book : AggregateRoot
     {
         if (!IsAvailable())
             return Error.Conflict("Book.NoCopiesAvailable", "No copies available to borrow");
-        
+
         AvailableCopies--;
         Status = AvailableCopies == 0 ? BookStatus.AllBorrowed : BookStatus.Available;
-        
+
         return Result.Success;
     }
 
-public ErrorOr<Success> ReturnCopy()
+    public ErrorOr<Success> ReturnCopy()
     {
         if (AvailableCopies >= TotalCopies)
             return Error.Conflict("Book.CannotReturnMore", "Cannot return more copies than total");
-        
+
         AvailableCopies++;
         Status = BookStatus.Available;
-        
+
         return Result.Success;
     }
 }

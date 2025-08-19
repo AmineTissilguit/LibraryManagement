@@ -1,4 +1,3 @@
-using System;
 using LibraryManagement.Domain.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;

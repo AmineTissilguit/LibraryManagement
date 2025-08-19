@@ -1,5 +1,3 @@
-using System;
-
 namespace LibraryManagement.Domain.Events;
 
 public class MemberRegisteredEvent : BaseDomainEvent
@@ -10,7 +8,7 @@ public class MemberRegisteredEvent : BaseDomainEvent
     public string FullName { get; }
     public DateTime RegistrationDate { get; }
 
-    public MemberRegisteredEvent(int memberId, string membershipNumber, 
+    public MemberRegisteredEvent(int memberId, string membershipNumber,
                                string email, string fullName, DateTime registrationDate)
     {
         MemberId = memberId;

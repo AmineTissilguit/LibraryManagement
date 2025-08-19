@@ -28,7 +28,7 @@ public class ReturnBookCommandHandler : IRequestHandler<ReturnBookCommand, Error
 
         if (transaction is null)
         {
-            return Error.NotFound("BorrowingTransaction.NotFound", 
+            return Error.NotFound("BorrowingTransaction.NotFound",
                                 $"Borrowing transaction with ID {request.TransactionId} was not found");
         }
 

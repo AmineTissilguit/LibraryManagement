@@ -9,6 +9,6 @@ public interface IApplicationDbContext
     DbSet<Book> Books { get; }
     DbSet<Member> Members { get; }
     DbSet<BorrowingTransaction> BorrowingTransactions { get; }
-    
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

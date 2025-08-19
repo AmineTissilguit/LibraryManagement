@@ -10,7 +10,7 @@ namespace LibraryManagement.API.Controllers
     [ApiController]
     public class BorrowingTransactionsController : ControllerBase
     {
-         private readonly ISender _sender;
+        private readonly ISender _sender;
 
         public BorrowingTransactionsController(ISender sender)
         {
@@ -21,9 +21,10 @@ namespace LibraryManagement.API.Controllers
         public async Task<IActionResult> BorrowBook([FromBody] BorrowBookCommand command)
         {
             var result = await _sender.Send(command);
-    
+
             return result.Match(
-                transaction => Ok(new { 
+                transaction => Ok(new
+                {
                     TransactionId = transaction.Id,
                     transaction.BookId,
                     transaction.MemberId,
@@ -42,7 +43,8 @@ namespace LibraryManagement.API.Controllers
             var result = await _sender.Send(command);
 
             return result.Match(
-                transaction => Ok(new {
+                transaction => Ok(new
+                {
                     TransactionId = transaction.Id,
                     transaction.BookId,
                     transaction.MemberId,
@@ -51,8 +53,8 @@ namespace LibraryManagement.API.Controllers
                     transaction.ReturnDate,
                     Status = transaction.Status.ToString(),
                     transaction.FineAmount,
-                    Message = transaction.FineAmount > 0 
-                        ? $"Book returned with fine: {transaction.FineAmount:C}" 
+                    Message = transaction.FineAmount > 0
+                        ? $"Book returned with fine: {transaction.FineAmount:C}"
                         : "Book returned successfully"
                 }),
                 errors => errors.ToProblemDetails(this));

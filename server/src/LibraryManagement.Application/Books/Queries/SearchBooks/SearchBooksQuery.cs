@@ -20,7 +20,7 @@ public class SearchBooksQueryHandler : IRequestHandler<SearchBooksQuery, ErrorOr
     public async Task<ErrorOr<List<Book>>> Handle(SearchBooksQuery request, CancellationToken cancellationToken)
     {
         var searchTerm = request.SearchTerm.ToLower();
-        
+
         var books = await _context.Books
             .AsNoTracking()
             .Where(b => b.Title.ToLower().Contains(searchTerm) ||

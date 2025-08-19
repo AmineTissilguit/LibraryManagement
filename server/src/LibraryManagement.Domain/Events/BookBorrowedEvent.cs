@@ -1,5 +1,3 @@
-using System;
-
 namespace LibraryManagement.Domain.Events;
 
 public class BookBorrowedEvent : BaseDomainEvent
@@ -10,7 +8,7 @@ public class BookBorrowedEvent : BaseDomainEvent
     public DateTime BorrowDate { get; }
     public DateTime DueDate { get; }
 
-    public BookBorrowedEvent(int bookId, int memberId, int transactionId, 
+    public BookBorrowedEvent(int bookId, int memberId, int transactionId,
                            DateTime borrowDate, DateTime dueDate)
     {
         BookId = bookId;

@@ -31,7 +31,7 @@ public class BorrowBookCommandHandler : IRequestHandler<BorrowBookCommand, Error
         var hasActiveTransaction = await MemberHasActiveBorrowingForBookAsync(request.BookId, request.MemberId, cancellationToken);
         if (hasActiveTransaction)
         {
-            return Error.Conflict("BorrowingTransaction.AlreadyBorrowed", 
+            return Error.Conflict("BorrowingTransaction.AlreadyBorrowed",
                                 "Member has already borrowed this book");
         }
 
@@ -59,7 +59,7 @@ public class BorrowBookCommandHandler : IRequestHandler<BorrowBookCommand, Error
         var book = await _context.Books
             .FirstOrDefaultAsync(b => b.Id == bookId, cancellationToken);
 
-        return book is null 
+        return book is null
             ? Error.NotFound("Book.NotFound", $"Book with ID {bookId} was not found")
             : book;
     }
@@ -69,7 +69,7 @@ public class BorrowBookCommandHandler : IRequestHandler<BorrowBookCommand, Error
         var member = await _context.Members
             .FirstOrDefaultAsync(m => m.Id == memberId, cancellationToken);
 
-        return member is null 
+        return member is null
             ? Error.NotFound("Member.NotFound", $"Member with ID {memberId} was not found")
             : member;
     }
@@ -77,9 +77,9 @@ public class BorrowBookCommandHandler : IRequestHandler<BorrowBookCommand, Error
     private async Task<bool> MemberHasActiveBorrowingForBookAsync(int bookId, int memberId, CancellationToken cancellationToken)
     {
         return await _context.BorrowingTransactions
-            .AnyAsync(bt => bt.BookId == bookId && 
-                           bt.MemberId == memberId && 
-                           bt.Status == Domain.Enums.BorrowingStatus.Active, 
+            .AnyAsync(bt => bt.BookId == bookId &&
+                           bt.MemberId == memberId &&
+                           bt.Status == Domain.Enums.BorrowingStatus.Active,
                      cancellationToken);
     }
 }

@@ -29,12 +29,12 @@ namespace LibraryManagement.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterMember([FromBody] RegisterMemberCommand   command)
+        public async Task<IActionResult> RegisterMember([FromBody] RegisterMemberCommand command)
         {
             var result = await _sender.Send(command);
 
             return result.Match(
-                member => CreatedAtAction(nameof(GetMemberById), new { id = member.Id },    member),
+                member => CreatedAtAction(nameof(GetMemberById), new { id = member.Id }, member),
                 errors => errors.ToProblemDetails(this));
         }
     }

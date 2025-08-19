@@ -1,5 +1,3 @@
-using System;
-
 namespace LibraryManagement.Domain.Events;
 
 public class BookReturnedEvent : BaseDomainEvent
@@ -11,7 +9,7 @@ public class BookReturnedEvent : BaseDomainEvent
     public decimal FineAmount { get; }
     public bool WasOverdue { get; }
 
-    public BookReturnedEvent(int bookId, int memberId, int transactionId, 
+    public BookReturnedEvent(int bookId, int memberId, int transactionId,
                            DateTime returnDate, decimal fineAmount, bool wasOverdue)
     {
         BookId = bookId;

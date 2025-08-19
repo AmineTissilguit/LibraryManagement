@@ -1,5 +1,3 @@
-using System;
-
 namespace LibraryManagement.Domain.Events;
 
 public abstract class BaseDomainEvent : IDomainEvent

@@ -1,4 +1,3 @@
-using System;
 using LibraryManagement.Domain.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -21,7 +20,7 @@ public class BookBorrowedEventHandler : INotificationHandler<BookBorrowedEvent>
             notification.BookId,
             notification.MemberId,
             notification.DueDate);
-            
+
         // - Send email notification to member and so on ...
 
         return Task.CompletedTask;

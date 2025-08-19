@@ -1,4 +1,3 @@
-using System;
 using ErrorOr;
 using LibraryManagement.Application.Common.Interfaces;
 using LibraryManagement.Domain.Entities;
@@ -35,7 +34,7 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Error
         {
             return Error.Conflict("Book.IsbnAlreadyExists", "A book with this ISBN already exists");
         }
-        
+
         var book = new Book(
             request.Isbn,
             request.Title,

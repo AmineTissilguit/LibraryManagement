@@ -1,4 +1,3 @@
-using System;
 using LibraryManagement.Domain.Events;
 
 namespace LibraryManagement.Domain.Common;

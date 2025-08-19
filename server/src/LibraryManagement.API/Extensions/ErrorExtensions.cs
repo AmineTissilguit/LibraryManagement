@@ -1,4 +1,3 @@
-using System;
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 
