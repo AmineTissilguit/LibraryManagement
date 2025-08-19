@@ -2,6 +2,7 @@ using System;
 using ErrorOr;
 using LibraryManagement.Domain.Common;
 using LibraryManagement.Domain.Enums;
+using LibraryManagement.Domain.Events;
 
 namespace LibraryManagement.Domain.Entities;
 
@@ -20,7 +21,7 @@ public class Member : AggregateRoot
 
     private Member() { } // EF Core constructor
 
-    public Member(string membershipNumber, string firstName, string lastName, 
+    public Member(string membershipNumber, string firstName, string lastName,
                   string email, string phone, string address, MembershipType membershipType)
     {
         MembershipNumber = membershipNumber;
@@ -33,6 +34,13 @@ public class Member : AggregateRoot
         RegistrationDate = DateTime.UtcNow;
         IsActive = true;
         ActiveBorrowingsCount = 0;
+        
+        RaiseDomainEvent(new MemberRegisteredEvent(
+        Id, 
+        MembershipNumber,
+        Email,
+        FullName,
+        RegistrationDate));
     }
 
     public string FullName => $"{FirstName} {LastName}";
