@@ -21,7 +21,7 @@ public class RegisterMemberCommandValidator : AbstractValidator<RegisterMemberCo
 
         RuleFor(x => x.Phone)
             .NotEmpty().WithMessage("Phone is required")
-            .Matches(@"^[\+]?[1-9][\d]{0,15}$").WithMessage("Invalid phone format");
+            .Matches(@"^(\+212|0)[567]\d{8}$").WithMessage("Invalid Moroccan phone number. Use format: +212612345678 or 0612345678");
 
         RuleFor(x => x.Address)
             .NotEmpty().WithMessage("Address is required")

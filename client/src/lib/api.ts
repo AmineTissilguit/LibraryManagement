@@ -82,6 +82,8 @@ export const booksApi = {
 
 // Members API
 export const membersApi = {
+  getAll: (): Promise<Member[]> => apiRequest("/members"),
+
   getById: (id: number): Promise<Member> => apiRequest(`/members/${id}`),
 
   create: (member: CreateMemberRequest): Promise<Member> =>

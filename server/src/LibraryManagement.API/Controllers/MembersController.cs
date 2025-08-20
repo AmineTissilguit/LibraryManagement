@@ -1,5 +1,6 @@
 using LibraryManagement.API.Extensions;
 using LibraryManagement.Application.Members.Commands.RegisterMember;
+using LibraryManagement.Application.Members.Queries.GetAllMembers;
 using LibraryManagement.Application.Members.Queries.GetMemberById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,17 @@ namespace LibraryManagement.API.Controllers
         public MembersController(ISender sender)
         {
             _sender = sender;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllMembers()
+        {
+            var query = new GetAllMembersQuery();
+            var result = await _sender.Send(query);
+
+            return result.Match(
+                members => Ok(members),
+                errors => errors.ToProblemDetails(this));
         }
 
         [HttpGet("{id}")]

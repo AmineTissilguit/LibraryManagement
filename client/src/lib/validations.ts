@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MembershipType } from "../types";
 
 export const createBookSchema = z.object({
   isbn: z
@@ -27,4 +28,29 @@ export const createBookSchema = z.object({
     .max(100, "Too many copies"),
 });
 
+export const createMemberSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, "First name is required")
+    .max(50, "First name too long"),
+  lastName: z
+    .string()
+    .min(1, "Last name is required")
+    .max(50, "Last name too long"),
+  email: z.email("Invalid email format"),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .regex(
+      /^(\+212|0)[567]\d{8}$/,
+      "Invalid phone number. Use format: +212612345678 or 0612345678"
+    ),
+
+  address: z.string().min(1, "Address is required"),
+  membershipType: z.enum(MembershipType, {
+    message: "Please select a membership type",
+  }),
+});
+
 export type CreateBookFormData = z.infer<typeof createBookSchema>;
+export type CreateMemberFormData = z.infer<typeof createMemberSchema>;

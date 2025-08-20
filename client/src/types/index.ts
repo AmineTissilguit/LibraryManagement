@@ -1,3 +1,23 @@
+export enum MembershipType {
+  Student = 0,
+  Adult = 1,
+  Senior = 2,
+  Staff = 3,
+}
+
+export enum BookStatus {
+  Available = "Available",
+  AllBorrowed = "AllBorrowed",
+  Damaged = "Damaged",
+  Lost = "Lost",
+}
+
+export enum TransactionStatus {
+  Active = "Active",
+  Returned = "Returned",
+  Overdue = "Overdue",
+}
+
 export interface Book {
   id: number;
   isbn: string;
@@ -8,7 +28,7 @@ export interface Book {
   genre: string;
   totalCopies: number;
   availableCopies: number;
-  status: "Available" | "AllBorrowed" | "Damaged" | "Lost";
+  status: BookStatus;
   createdAt: string;
 }
 
@@ -20,7 +40,7 @@ export interface Member {
   email: string;
   phone: string;
   address: string;
-  membershipType: "Student" | "Adult" | "Senior" | "Staff";
+  membershipType: MembershipType;
   isActive: boolean;
   activeBorrowingsCount: number;
   registrationDate: string;
@@ -34,7 +54,7 @@ export interface BorrowingTransaction {
   borrowDate: string;
   dueDate: string;
   returnDate?: string;
-  status: "Active" | "Returned" | "Overdue";
+  status: TransactionStatus;
   fineAmount: number;
   createdAt: string;
 }
@@ -55,7 +75,7 @@ export interface CreateMemberRequest {
   email: string;
   phone: string;
   address: string;
-  membershipType: "Student" | "Adult" | "Senior" | "Staff";
+  membershipType: MembershipType;
 }
 
 export interface BorrowBookRequest {
