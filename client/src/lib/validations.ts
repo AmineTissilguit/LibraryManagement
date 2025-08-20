@@ -52,5 +52,16 @@ export const createMemberSchema = z.object({
   }),
 });
 
+export const borrowBookSchema = z.object({
+  bookId: z.number().min(1, "Please select a book"),
+  memberId: z.number().min(1, "Please select a member"),
+});
+
+export const returnBookSchema = z.object({
+  transactionId: z.number().min(1, "Please enter a valid transaction ID"),
+});
+
 export type CreateBookFormData = z.infer<typeof createBookSchema>;
 export type CreateMemberFormData = z.infer<typeof createMemberSchema>;
+export type BorrowBookFormData = z.infer<typeof borrowBookSchema>;
+export type ReturnBookFormData = z.infer<typeof returnBookSchema>;
