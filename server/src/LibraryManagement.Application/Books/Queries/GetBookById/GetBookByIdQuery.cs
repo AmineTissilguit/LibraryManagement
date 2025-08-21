@@ -1,4 +1,5 @@
 using ErrorOr;
+using LibraryManagement.Application.Books.Queries.Common;
 using LibraryManagement.Application.Common.Interfaces;
 using LibraryManagement.Domain.Entities;
 using MediatR;
@@ -6,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagement.Application.Books.Queries.GetBookById;
 
-public record GetBookByIdQuery(int Id) : IRequest<ErrorOr<Book>>;
+public record GetBookByIdQuery(int Id) : IRequest<ErrorOr<BookDto>>;
 
-public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, ErrorOr<Book>>
+public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, ErrorOr<BookDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -17,11 +18,25 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, ErrorOr
         _context = context;
     }
 
-    public async Task<ErrorOr<Book>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<BookDto>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
     {
-        var book = await _context.Books
+var book = await _context.Books
             .AsNoTracking()
-            .FirstOrDefaultAsync(b => b.Id == request.Id, cancellationToken);
+            .Where(b => b.Id == request.Id)
+            .Select(b => new BookDto(
+                b.Id,
+                b.Isbn,
+                b.Title,
+                b.Author,
+                b.Publisher,
+                b.PublicationYear,
+                b.Genre,
+                b.TotalCopies,
+                b.AvailableCopies,
+                b.Status,
+                b.IsAvailable()
+            ))
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (book is null)
         {

@@ -1,6 +1,7 @@
 using LibraryManagement.API.Extensions;
 using LibraryManagement.Application.BorrowingTransactions.Commands.BorrowBook;
 using LibraryManagement.Application.BorrowingTransactions.Commands.ReturnBook;
+using LibraryManagement.Application.BorrowingTransactions.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,6 +58,17 @@ namespace LibraryManagement.API.Controllers
                         ? $"Book returned with fine: {transaction.FineAmount:C}"
                         : "Book returned successfully"
                 }),
+                errors => errors.ToProblemDetails(this));
+        }
+
+        [HttpGet("member/{memberId}/history")]
+        public async Task<IActionResult> GetMemberBorrowingHistory(int memberId)
+        {
+            var query = new GetMemberBorrowingHistoryQuery(memberId);
+            var result = await _sender.Send(query);
+
+            return result.Match(
+                transactions => Ok(transactions),
                 errors => errors.ToProblemDetails(this));
         }
     }
