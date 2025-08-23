@@ -1,6 +1,7 @@
 using LibraryManagement.Application;
 using LibraryManagement.Infrastructure;
 using LibraryManagement.Infrastructure.Data;
+using LibraryManagement.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.AddApplicationServices();
 builder.AddInfrastructureServices();
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
