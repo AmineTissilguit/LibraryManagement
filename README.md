@@ -49,17 +49,12 @@ npm install
 
 #### Configure API Base URL (Optional)
 
-The client is pre-configured to work with the recommended Direct .NET setup (port 5105).
+The client comes with a `.env` file pre-configured for Direct .NET (port 5105).
 
-**If using Docker**, create a `.env` file:
-
-```bash
-cp .env.example .env
+**If using Docker**, edit `client/.env` and switch the commented lines:
 ```
-
-Then uncomment the Docker URL in `.env`:
-
-```
+# Comment out the Direct .NET line and uncomment the Docker line
+# VITE_API_BASE_URL=http://localhost:5105/api
 VITE_API_BASE_URL=http://localhost:5000/api
 ```
 
