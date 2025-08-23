@@ -6,7 +6,7 @@ import type {
   BorrowBookRequest,
 } from "../types";
 
-const API_BASE_URL = "http://localhost:5105/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5105/api";
 
 class ApiError extends Error {
   status: number;

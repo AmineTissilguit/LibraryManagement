@@ -21,22 +21,20 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, ErrorOr
     public async Task<ErrorOr<List<BookDto>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
     {
          var books = await _context.Books
-            .AsNoTracking()
-            .Select(b => new BookDto(
-                b.Id,
-                b.Isbn,
-                b.Title,
-                b.Author,
-                b.Publisher,
-                b.PublicationYear,
-                b.Genre,
-                b.TotalCopies,
-                b.AvailableCopies,
-                b.Status,
-                b.IsAvailable()
-            ))
-            .OrderBy(b => b.Title)
-            .ToListAsync(cancellationToken);
+        .AsNoTracking()
+        .Select(b => new BookDto(
+            b.Id,
+            b.Isbn,
+            b.Title,
+            b.Author,
+            b.Publisher,
+            b.PublicationYear,
+            b.Genre,
+            b.TotalCopies,
+            b.AvailableCopies,
+            b.Status,
+            b.AvailableCopies > 0
+        )).ToListAsync(cancellationToken);
 
         return books;
     }

@@ -9,17 +9,34 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   const getStatusColor = (status: Book["status"]) => {
-    switch (status) {
-      case "Available":
+    const numericStatus = typeof status === 'number' ? status : parseInt(status as string);
+    switch (numericStatus) {
+      case 0: // Available
         return "bg-green-100 text-green-800";
-      case "AllBorrowed":
+      case 1: // AllBorrowed
         return "bg-yellow-100 text-yellow-800";
-      case "Damaged":
+      case 2: // Damaged
         return "bg-red-100 text-red-800";
-      case "Lost":
+      case 3: // Lost
         return "bg-gray-100 text-gray-800";
       default:
         return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  const getStatusText = (status: Book["status"]) => {
+    const numericStatus = typeof status === 'number' ? status : parseInt(status as string);
+    switch (numericStatus) {
+      case 0:
+        return "Available";
+      case 1:
+        return "All Borrowed";
+      case 2:
+        return "Damaged";
+      case 3:
+        return "Lost";
+      default:
+        return "Unknown";
     }
   };
 
@@ -32,7 +49,7 @@ export default function BookCard({ book }: BookCardProps) {
           </h3>
           <p className="text-sm text-gray-600 mb-2">ISBN: {book.isbn}</p>
         </div>
-        <Badge className={getStatusColor(book.status)}>{book.status}</Badge>
+        <Badge className={getStatusColor(book.status)}>{getStatusText(book.status)}</Badge>
       </div>
 
       <div className="space-y-2 text-sm text-gray-600">

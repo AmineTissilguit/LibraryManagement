@@ -20,7 +20,7 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, ErrorOr
 
     public async Task<ErrorOr<BookDto>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
     {
-var book = await _context.Books
+        var book = await _context.Books
             .AsNoTracking()
             .Where(b => b.Id == request.Id)
             .Select(b => new BookDto(

@@ -3,8 +3,10 @@ import Layout from "./components/layout/Layout";
 import Books from "./pages/Books";
 import Members from "./pages/Members";
 import Transactions from "./pages/Transactions";
+import useDocumentTitle from "./hooks/useDocumentTitle";
 
 function App() {
+  useDocumentTitle();
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
