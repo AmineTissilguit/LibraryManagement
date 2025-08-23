@@ -52,6 +52,7 @@ npm install
 The client comes with a `.env` file pre-configured for Direct .NET (port 5105).
 
 **If using Docker**, edit `client/.env` and switch the commented lines:
+
 ```
 # Comment out the Direct .NET line and uncomment the Docker line
 # VITE_API_BASE_URL=http://localhost:5105/api
@@ -90,10 +91,6 @@ The API provides the following main endpoints:
 # Backend tests
 cd server
 dotnet test
-
-# Frontend tests (if available)
-cd client
-npm test
 ```
 
 ## Port Configuration
